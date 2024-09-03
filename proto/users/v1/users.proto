@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+option go_package="github.com/az58740/connect-go-example/users/v1;usersv1";
+
+package users.v1;
+
+import "google/protobuf/empty.proto";
+
+enum UserStatus {
+    USER_STATUS_UNKNOWN = 0;
+    USER_STATUS_OFFLINE = 1;
+    USER_STATUS_BUSY = 2;
+    USER_STATUS_AVAILABLE = 3;
+}
+message GetUserRequest {
+    int32 id = 1;
+}
+message GetUserResponse {
+    int32 id = 1;
+    string name = 2;
+    int32 age = 3;
+    UserStatus status = 4;
+}
+message CreateUserRequest {
+    int32 id = 1;
+    string name = 2;
+    int32 age = 3;
+    UserStatus status = 4;
+}
+message GetUsersResponse {
+    int32 id = 1;
+    string name = 2;
+    int32 age = 3;
+    UserStatus status = 4;
+}
+service UsersService {
+    rpc GetUser(GetUserRequest) returns (GetUserResponse) {};
+    rpc CreateUser(stream CreateUserRequest) returns (google.protobuf.Empty) {}
+    rpc GetUsers(google.protobuf.Empty) returns (stream GetUsersResponse) {};
+} 
