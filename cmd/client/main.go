@@ -19,7 +19,7 @@ func main() {
 	res, err := client.GetUser(
 		context.Background(),
 		connect.NewRequest(&usersv1.GetUserRequest{
-			Id: 2,
+			Id: 3,
 		}),
 	)
 	if err != nil {
