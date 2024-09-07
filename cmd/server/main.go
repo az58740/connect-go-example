@@ -32,6 +32,10 @@ func (u *UsersService) CreateUser(ctx context.Context, stream *connect.ClientStr
 	for stream.Receive() {
 		u.savedPersons = append(u.savedPersons, (*usersv1.GetUserResponse)(stream.Msg()))
 	}
+	if err := stream.Err(); err != nil {
+		return nil, connect.NewError(connect.CodeUnknown, err)
+	}
+
 	return &connect.Response[emptypb.Empty]{}, nil
 }
 
