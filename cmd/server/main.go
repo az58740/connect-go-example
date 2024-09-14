@@ -55,6 +55,7 @@ func (u *UsersService) GetUsers(ctx context.Context, req *connect.Request[emptyp
 func (u *UsersService) GetUser(ctx context.Context, req *connect.Request[usersv1.GetUserRequest]) (*connect.Response[usersv1.GetUserResponse], error) {
 	//log.Println("Request headers: ", req.Header())
 	fmt.Println(req.Header().Get("Acme-Tenant-Id"))
+	log.Printf("Requested IUser Id: %d", req.Msg.Id)
 	user := *u.savedPersons[req.Msg.Id-1]
 	res := connect.NewResponse(&user)
 	res.Header().Set("Users-Version", "v1")
